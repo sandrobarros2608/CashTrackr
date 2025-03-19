@@ -10,20 +10,22 @@ export class BudgetController {
                 order: [
                     ['createdAt', 'DESC']
                 ],
-                // TODO: Filtrar por el usuario autenticado
+                where: {
+                    userId: req.user.id
+                }
             });
             res.json(budgets);
             res.status(200);
         } catch (error) {
-            res.status(404).json({ error: 'Presupuestos no encontrados' });
+            res.status(500).json({ error: 'Hubo un error' });
         }
 
     }
 
     static create = async (req: Request, res: Response) => {
         try {
-            console.log(req.body);
-            const budget = new Budget(req.body);
+            const budget = await Budget.create(req.body);
+            budget.userId = req.user.id
             await budget.save();
             res.status(201).json('Presupuesto Creado Correctamente');
         } catch (error) {
@@ -35,6 +37,8 @@ export class BudgetController {
         const budget = await Budget.findByPk(req.budget.id, {
             include: [Expense]
         })
+
+        
         res.json(budget);
     }
 

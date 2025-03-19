@@ -19,9 +19,15 @@ export class AuthController {
         }
 
         try {
-            const user = new User(req.body)
+            const user = await User.create(req.body)
             user.password = await hashPassword(password);
-            user.token = generateToken();
+            const token = generateToken();
+            user.token = token;
+
+            if (process.env.NODE_ENV !== 'production') {
+                globalThis.cashTrackerConfirmationToken = token;
+            }
+
             await user.save()
 
             await AuthEmail.sendConfirmationEmail({
@@ -30,7 +36,7 @@ export class AuthController {
                 token: user.token
             });
 
-            res.json('Cuenta Creada Correctamente')
+            res.status(201).json('Cuenta Creada Correctamente')
         } catch (error) {
             // console.log(error)
             res.status(500).json({ error: 'Hubo un error' })
@@ -43,7 +49,7 @@ export class AuthController {
         const user = await User.findOne({ where: { token: token } })
         if (!user) {
             const error = new Error('Token no válido')
-            res.status(404).json({ error: error.message })
+            res.status(401).json({ error: error.message })
             return
         }
 
@@ -134,5 +140,43 @@ export class AuthController {
         await user.save()
 
         res.json('El password se modificó correctamente')
+    }
+
+    static user = async (req: Request, res: Response) => {
+        res.json(req.user)
+    }
+
+    static updateCurrentUserPassword = async (req: Request, res: Response) => {
+        const { current_password, password } = req.body
+        const { id } = req.user
+
+        const user = await User.findByPk(id)
+
+        const isPasswordCorrect = await checkPassword(current_password, user.password)
+        if (!isPasswordCorrect) {
+            const error = new Error('El Password actual es incorrecto')
+            res.status(401).json({ error: error.message })
+            return
+        }
+
+        user.password = await hashPassword(password)
+        await user.save()
+
+        res.json('El Password se modificó correctamente')
+    }
+
+    static checkPassword = async (req: Request, res: Response) => {
+        const { password } = req.body
+        const { id } = req.user
+
+        const user = await User.findByPk(id)
+
+        const isPasswordCorrect = await checkPassword(password, user.password)
+        if (!isPasswordCorrect) {
+            const error = new Error('El Password actual es incorrecto')
+            res.status(401).json({ error: error.message })
+            return
+        }
+        res.json('Password Correcto')
     }
 }
