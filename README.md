@@ -1,5 +1,5 @@
 # **CashTrackr**
-**CashTrackr** es una aplicación web diseñada para ayudarte a administrar tus **gastos y presupuesto** de manera eficiente. Con una interfaz intuitiva y herramientas avanzadas, puedes **registrar ingresos y egresos**, **categorizar transacciones** y **obtener informes detallados** sobre tu situación financiera.
+**CashTrackr** es una aplicación web diseñada para ayudarte a administrar tus **gastos y presupuesto** de manera eficiente. Con una interfaz intuitiva y herramientas avanzadas.
 
 ---
 
@@ -7,7 +7,7 @@
 **CashTrackr** centraliza toda tu información financiera en un solo lugar, permitiendo un **control total** sobre tus finanzas personales. La aplicación ofrece funcionalidades como:
 
 - ✅ **Registro y categorización de ingresos y gastos.**
-- 📊 **Generación de reportes detallados y visualizaciones.**
+- 📊 **Generación de reporte visual.**
 
 ---
 
