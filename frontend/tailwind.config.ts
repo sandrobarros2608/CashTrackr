@@ -7,7 +7,14 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "auth": "url('/grafico.svg')"
+      },
+      backgroundSize: {
+        '30': '30rem'
+      }
+    },
   },
   plugins: [],
 };
