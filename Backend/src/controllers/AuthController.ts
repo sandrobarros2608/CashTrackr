@@ -120,7 +120,7 @@ export class AuthController {
             res.status(404).json({ error: error.message })
             return
         }
-        res.json('Token válido...');
+        res.json('Token válido, asigna una nueva contraseña');
     }
 
     static resetPasswordWithToken = async (req: Request, res: Response) => {
