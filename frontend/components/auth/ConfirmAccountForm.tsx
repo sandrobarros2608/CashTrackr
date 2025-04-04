@@ -30,11 +30,8 @@ export default function ConfirmAccountForm() {
             })
         }
         if (state.success) {
-            toast.success(state.success, {
-                onClose: () => {
-                    router.push('/auth/login')
-                }
-            })
+            toast.success(state.success)
+            router.push('/auth/login')
         }
     }, [state])
 

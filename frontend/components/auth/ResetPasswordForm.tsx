@@ -21,15 +21,8 @@ export default function ResetPasswordForm({ token }: { token: string }) {
             })
         }
         if (state.success) {
-            toast.success(state.success, {
-                onClose: () => {
-                    router.push('/auth/login')
-                },
-                onClick: () => {
-                    router.push('/auth/login')
-                }
-            }
-            )
+            toast.success(state.success)
+            router.push('/auth/login')
 
         }
     }, [state])

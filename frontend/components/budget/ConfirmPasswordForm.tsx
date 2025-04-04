@@ -71,6 +71,7 @@ export default function ConfirmPasswordForm() {
                     <button
                         className="bg-amber-500 hover:bg-amber-600 w-full p-3 rounded-lg text-white font-black cursor-pointer transition-colors"
                         onClick={closeModal}
+                        type="button"
                     >Cancelar</button>
                 </div>
             </form>
