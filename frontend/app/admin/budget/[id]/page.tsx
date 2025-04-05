@@ -22,7 +22,7 @@ export default async function BudgetDetailsPage({ params }: { params: { id: stri
     const totalSpend = budget.expenses.reduce((total, expense) => +expense.amount + total, 0)
     const totalAvailable = +budget.amount - totalSpend
 
-    const percentage = +((totalSpend / +budget.amount) * 100).toFixed(2)
+    const percentage = +((totalSpend / +budget.amount) * 100).toFixed(1)
 
     return (
         <>

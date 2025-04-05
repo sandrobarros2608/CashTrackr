@@ -13,7 +13,7 @@ export default function ProgressBar({ percentage }: { percentage: number }) {
                     textColor: percentage >= 100 ? '#DC2626' :'#F59E0B',
                     textSize: 8
                 })}
-                text={`${percentage} Gastado`}
+                text={`${percentage}% Gastado`}
                 value={percentage}
 
             />
