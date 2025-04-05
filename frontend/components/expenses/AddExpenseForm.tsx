@@ -20,6 +20,7 @@ export default function AddExpenseForm({ closeModal }: { closeModal: () => void 
     useEffect(() => {
         if (state.success) {
             toast.success(state.success)
+            closeModal()
         }
     }, [state])
 
